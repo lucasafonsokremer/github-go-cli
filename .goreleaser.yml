@@ -38,7 +38,7 @@ nfpms:
     homepage:  https://github.com/lucasafonsokremer/github-go-cli
     maintainer: "Lucas Afonso Kremer"
     description: "Access all of GitHub’s public API functionality from your command-line."
-    license: Apache-2.0
+    license: MIT
     formats:
       - apk
       - deb
