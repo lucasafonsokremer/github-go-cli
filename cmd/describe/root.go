@@ -13,10 +13,10 @@ import (
 // describeCmd represents the describe command
 var DescribeCmd = &cobra.Command{
 	Use:   "describe",
-	Short: "describe of",
+	Short: "Retrieve detailed information about any object",
 	Long: ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("describe called")
+		fmt.Println("You must specify the type of resource to describe. See 'github-go-cli describe -h' for help and examples")
 	},
 }
 

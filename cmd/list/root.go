@@ -13,10 +13,10 @@ import (
 // listCmd represents the list command
 var ListCmd = &cobra.Command{
 	Use:   "list",
-	Short: "A list of",
+	Short: "Retrieve user profile information such as name, location, public repos, followers, following",
 	Long: ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("list called")
+		fmt.Println("You must specify the type of resource to list. See 'github-go-cli list -h' for help and examples")
 	},
 }
 
