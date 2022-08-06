@@ -6,7 +6,7 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/lucasafonsokremer/github-go-cli/cmd/utils/types"
+	"github.com/lucasafonsokremer/github-go-cli/cmd/util/types"
 )
 
 // githubHost declare the base url
@@ -64,6 +64,7 @@ func (config config) GetFollowers() (types.Followers, error) {
 	return followers, nil
 }
 
+// makeRequest create the request and deal with some possible errors
 func makeRequest(method string, URL string, body io.Reader) (*http.Response, error) {
 	request, err := http.NewRequest(method, URL, body)
 
