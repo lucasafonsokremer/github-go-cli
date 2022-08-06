@@ -42,11 +42,9 @@ func (config config) GetUser() (types.User, error) {
 	var user types.User
 
 	if err := json.NewDecoder(resp.Body).Decode(&user); err != nil {
-		fmt.Println("aqui")
 		return types.User{}, err
 	}
 
-	fmt.Println(user)
 	return user, nil
 }
 
