@@ -7,6 +7,7 @@ package describe
 import (
 	"fmt"
 	"os"
+	"text/tabwriter"
 
 	"github.com/spf13/cobra"
 	"github.com/lucasafonsokremer/github-go-cli/cmd/util/service"
@@ -25,29 +26,22 @@ var userCmd = &cobra.Command{
 	},
 	Run: func(cmd *cobra.Command, args []string) {
 		client := service.CreateClient(fmt.Sprintf("/users/%s", args[0]))
-		userInfo, err := getUserInfo(client)
+		user, err := client.GetUser()
 
 		if err != nil {
 			_ = fmt.Errorf("%v", err)
 			os.Exit(1)
 		}
 
-		displayInfo(userInfo)
+		displayInfo(user)
 	},
 }
 
-func getUserInfo(client service.Client) (types.UserInfo, error) {
-	userInfo, err := client.GetUser()
-
-	if err != nil {
-		return types.UserInfo{}, err
+func displayInfo(user types.User) {
+	w := tabwriter.NewWriter(os.Stdout, 0, 0, 5, ' ', 0)
+	_, _ = fmt.Fprintln(w, "Name\tLocation")
+	for _, u := range user {
+		_, _ = fmt.Fprintln(w, fmt.Sprintf("%s\t%s", u.Name, u.Location))
 	}
-
-	return userInfo, err
-}
-
-func displayInfo(user types.UserInfo) {
-	fmt.Println(user.Name)
-	fmt.Println(user.Location)
-	fmt.Println(user.PublicRepos)
+	_ = w.Flush()
 }

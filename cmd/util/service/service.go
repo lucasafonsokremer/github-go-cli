@@ -14,7 +14,7 @@ const githubHost = "https://api.github.com"
 
 // Client is interface of service
 type Client interface {
-	GetUser() (types.UserInfo, error)
+	GetUser() (types.User, error)
 	GetFollowers() (types.Followers, error)
 }
 
@@ -32,19 +32,22 @@ func CreateClient(path string) Client {
 }
 
 // GetUser fetches user information from github.com
-func (config config) GetUser() (types.UserInfo, error) {
+func (config config) GetUser() (types.User, error) {
 	resp, err := makeRequest(http.MethodGet, config.URL, nil)
+
 	if err != nil {
-		return types.UserInfo{}, err
+		return types.User{}, err
 	}
 
-	var userInfo types.UserInfo
+	var user types.User
 
-	if err := json.NewDecoder(resp.Body).Decode(&userInfo); err != nil {
-		return types.UserInfo{}, fmt.Errorf("error decoding response %v", err)
+	if err := json.NewDecoder(resp.Body).Decode(&user); err != nil {
+		fmt.Println("aqui")
+		return types.User{}, err
 	}
 
-	return userInfo, nil
+	fmt.Println(user)
+	return user, nil
 }
 
 // GetFollowers fetches followers list of user
