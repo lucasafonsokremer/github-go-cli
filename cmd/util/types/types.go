@@ -1,13 +1,13 @@
 package types
 
 // userInfo encapsulates user information
-type userInfo struct {
+type UserInfo struct {
 	Name	    string `json:"name"`
 	Location    string `json:"location"`
 }
 
 // User represents list of user information
-type User []userInfo
+type User []UserInfo
 
 // Follower encapsulates follower meta
 type follower struct {

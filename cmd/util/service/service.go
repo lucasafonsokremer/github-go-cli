@@ -39,13 +39,13 @@ func (config config) GetUser() (types.User, error) {
 		return types.User{}, err
 	}
 
-	var user types.User
+	var user types.UserInfo
 
 	if err := json.NewDecoder(resp.Body).Decode(&user); err != nil {
 		return types.User{}, err
 	}
 
-	return user, nil
+	return types.User{user}, nil
 }
 
 // GetFollowers fetches followers list of user
